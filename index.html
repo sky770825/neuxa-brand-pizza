@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>焰窯披薩 | 手工柴燒披薩</title>
+    <style>
+        :root {
+            --earth: #C2956B;
+            --warm-earth: #D4A574;
+            --dark-earth: #8B5E3C;
+            --cream: #FFF5E8;
+            --red: #C0392B;
+            --dark-red: #8B1A1A;
+            --tomato: #E74C3C;
+            --charcoal: #2C1810;
+            --text: #3E2723;
+            --text-light: #6D4C41;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Noto Sans TC', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, var(--dark-red), var(--charcoal));
+            color: white;
+            text-align: center;
+            padding: 60px 20px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&q=80') center/cover;
+            opacity: 0.3;
+        }
+        header h1 { font-size: 3em; position: relative; letter-spacing: 6px; }
+        header p { font-size: 1.2em; position: relative; margin-top: 10px; opacity: 0.9; }
+        .flame-badge {
+            display: inline-block;
+            background: var(--tomato);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 20px;
+            margin-top: 16px;
+            position: relative;
+            font-weight: 600;
+        }
+        nav {
+            background: white;
+            padding: 12px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav a {
+            color: var(--dark-red);
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 1.05em;
+        }
+        nav a:hover { color: var(--tomato); }
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            gap: 40px;
+        }
+        .hero-text { flex: 1; min-width: 280px; }
+        .hero-text h2 { font-size: 2em; color: var(--charcoal); margin-bottom: 16px; }
+        .hero-text p { color: var(--text-light); font-size: 1.1em; margin-bottom: 12px; }
+        .hero-img { flex: 1; min-width: 280px; text-align: center; }
+        .hero-img img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(139,26,26,0.25);
+        }
+        .features {
+            background: var(--charcoal);
+            color: white;
+            padding: 60px 20px;
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 40px;
+            color: var(--warm-earth);
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+        .feature-card .icon { font-size: 3em; margin-bottom: 16px; }
+        .feature-card h3 { color: var(--warm-earth); margin-bottom: 10px; font-size: 1.3em; }
+        .feature-card p { opacity: 0.85; }
+        .menu {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        .menu h2 {
+            text-align: center;
+            font-size: 2em;
+            color: var(--charcoal);
+            margin-bottom: 40px;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .menu-item {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            border-top: 4px solid var(--tomato);
+        }
+        .menu-item:hover { transform: translateY(-4px); }
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .menu-item-body { padding: 20px; }
+        .menu-item-body h3 { color: var(--charcoal); margin-bottom: 6px; }
+        .menu-item-body .price {
+            color: var(--red);
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+        .menu-item-body p { color: var(--text-light); font-size: 0.95em; }
+        .chef-section {
+            background: linear-gradient(135deg, var(--dark-earth), var(--earth));
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .chef-section h2 { font-size: 2em; margin-bottom: 16px; }
+        .chef-section p { font-size: 1.1em; max-width: 700px; margin: 0 auto 20px; opacity: 0.95; }
+        .gallery {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        .gallery h2 { text-align: center; font-size: 2em; color: var(--charcoal); margin-bottom: 30px; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+        .gallery-grid img:hover { transform: scale(1.05); }
+        footer {
+            background: var(--charcoal);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.95em;
+        }
+        footer .social { margin: 12px 0; }
+        footer .social a {
+            color: var(--warm-earth);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        @media (max-width: 768px) {
+            header h1 { font-size: 2em; }
+            nav a { margin: 0 10px; font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🔥 焰窯披薩</h1>
+        <p>千年柴燒技藝，一口烈焰風味</p>
+        <div class="flame-badge">🔥 手工柴燒 · 職人匠心</div>
+    </header>
+    <nav>
+        <a href="#about">關於焰窯</a>
+        <a href="#menu">披薩菜單</a>
+        <a href="#chef">職人精神</a>
+        <a href="#gallery">美味實拍</a>
+        <a href="#contact">聯絡我們</a>
+    </nav>
+    <section class="hero" id="about">
+        <div class="hero-text">
+            <h2>每一片披薩，都經過 450°C 烈焰洗禮</h2>
+            <p>焰窯披薩堅持使用傳統義大利柴燒窯爐，以龍眼木與荔枝木為燃料，窯溫高達 450°C。每一片披薩在 90 秒內完成烘烤，餅皮外酥內軟，帶著獨特的柴燒香氣與豹紋焦斑。</p>
+            <p>我們選用義大利 Caputo 00 麵粉、聖馬札諾番茄、新鮮莫札瑞拉起司，搭配台灣在地小農食材，還原最道地的拿坡里風味。</p>
+            <p style="font-weight:600; color: var(--dark-red);">📍 台北市信義區松高路 88 號</p>
+            <p style="font-weight:600; color: var(--tomato);">🕐 週二至週日 11:30 - 14:30 / 17:30 - 21:30（週一公休）</p>
+        </div>
+        <div class="hero-img">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&q=80" alt="焰窯披薩">
+            <p style="margin-top:10px; color:var(--text-light); font-style:italic;">瑪格麗特披薩剛出爐的黃金時刻 🍕</p>
+        </div>
+    </section>
+    <section class="features">
+        <h2>🔥 四大堅持</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="icon">🪵</div>
+                <h3>柴燒窯爐</h3>
+                <p>義大利進口耐火磚窯，選用龍眼木與荔枝木柴燒，賦予披薩獨特煙燻風味。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🌾</div>
+                <h3>頂級麵粉</h3>
+                <p>使用義大利 Caputo 00 麵粉，72 小時低溫發酵，打造完美筋性與消化性。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🍅</div>
+                <h3>在地食材</h3>
+                <p>嚴選台灣小農有機蔬果、在地牧場新鮮起司，義式靈魂結合台灣風土。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">👐</div>
+                <h3>手作溫度</h3>
+                <p>從揉麵、展皮、鋪料到入窯，全程手工製作，每一片都是獨一無二的藝術品。</p>
+            </div>
+        </div>
+    </section>
+    <section class="menu" id="menu">
+        <h2>🍕 招牌披薩</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&q=80" alt="瑪格麗特披薩">
+                <div class="menu-item-body">
+                    <h3>經典瑪格麗特</h3>
+                    <p>聖馬札諾番茄醬 / 莫札瑞拉起司 / 新鮮羅勒 / 初榨橄欖油</p>
+                    <div class="price">NT$320</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="臘腸披薩">
+                <div class="menu-item-body">
+                    <h3>烈焰臘腸</h3>
+                    <p>義式辣味臘腸 / 莫札瑞拉起司 / 番茄醬 / 辣椒碎</p>
+                    <div class="price">NT$380</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=600&q=80" alt="松露披薩">
+                <div class="menu-item-body">
+                    <h3>黑松露野菇</h3>
+                    <p>黑松露醬 / 綜合野菇 / 帕瑪森起司 / 芝麻葉</p>
+                    <div class="price">NT$450</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1458642849426-cfb724f15ef7?w=600&q=80" alt="海鮮披薩">
+                <div class="menu-item-body">
+                    <h3>漁夫海鮮</h3>
+                    <p>鮮蝦 / 中卷 / 蛤蜊 / 大蒜 / 白酒奶油醬</p>
+                    <div class="price">NT$420</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="chef-section" id="chef">
+        <h2>👨‍🍳 職人精神</h2>
+        <p>主廚 Marco 曾赴義大利拿坡里學習正統柴燒披薩技藝，回台後以三年時間打造專屬柴燒窯爐。他說：「披薩的靈魂在於火候 — 太猛則焦，太弱則乾。唯有透過柴燒的烈焰，才能賦予餅皮那獨一無二的豹紋與香氣。」</p>
+        <p>每週五、六晚間，Marco 會在開放式廚房親自為客人呈現柴燒披薩秀。</p>
+    </section>
+    <section class="gallery" id="gallery">
+        <h2>📸 美味瞬間</h2>
+        <div class="gallery-grid">
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="披薩1">
+            <img src="https://images.unsplash.com/photo-1593504049359-74330189a7da?w=600&q=80" alt="披薩2">
+            <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=600&q=80" alt="披薩3">
+            <img src="https://images.unsplash.com/photo-1601924582970-9238bcb495d9?w=600&q=80" alt="披薩4">
+        </div>
+    </section>
+    <footer id="contact">
+        <h3>🔥 焰窯披薩 Fiamma Forno Pizza</h3>
+        <p>📍 台北市信義區松高路 88 號</p>
+        <p>📞 (02) 2722-0825</p>
+        <p>🕐 週二至週日 11:30 - 14:30 / 17:30 - 21:30</p>
+        <div class="social">
+            <a href="#">📷 Instagram</a>
+            <a href="#">📘 Facebook</a>
+            <a href="#">📱 LINE</a>
+        </div>
+        <p style="margin-top:16px; opacity:0.7;">© 2026 焰窯披薩 Fiamma Forno Pizza. All rights reserved.</p>
+    </footer>
+</body>
+</html>
